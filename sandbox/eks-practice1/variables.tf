@@ -19,3 +19,9 @@ variable "private_subnets" {
 
 variable "eks_cluster_name" {
 }
+
+variable "lb_controller_iam_role_name" {
+}
+
+variable "lb_controller_service_account_name" {
+}
