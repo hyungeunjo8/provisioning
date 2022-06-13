@@ -16,3 +16,6 @@ variable "public_subnets" {
 variable "private_subnets" {
     type        = list(string)
 }
+
+variable "eks_cluster_name" {
+}

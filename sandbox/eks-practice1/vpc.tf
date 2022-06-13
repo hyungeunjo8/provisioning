@@ -1,3 +1,4 @@
+# https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest
 module "vpc" {
     source = "terraform-aws-modules/vpc/aws"
     name = var.vpc_name
