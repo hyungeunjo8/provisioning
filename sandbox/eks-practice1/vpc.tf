@@ -11,4 +11,17 @@ module "vpc" {
 
     enable_nat_gateway     = true
     one_nat_gateway_per_az = true
+
+
+    # https://aws.amazon.com/ko/premiumsupport/knowledge-center/eks-load-balancer-controller-subnets/
+    public_subnet_tags = {
+        "kubernetes.io/cluster/${var.eks_cluster_name}" = "shared"
+        "kubernetes.io/role/elb"                      = "1"
+    }
+    
+    private_subnet_tags = {
+        "kubernetes.io/cluster/${var.eks_cluster_name}" = "shared"
+        "kubernetes.io/role/internal-elb"             = "1"
+    }
+
 }

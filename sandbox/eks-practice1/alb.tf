@@ -51,10 +51,9 @@ resource "helm_release" "release" {
       "clusterName"           = module.eks.cluster_id
       "serviceAccount.create" = "true"
       "serviceAccount.name"   = var.lb_controller_service_account_name
-      "region"                = "ap-northeast-2"
+      "region"                = "${var.aws_region}"
       "vpcId"                 = module.vpc.vpc_id
       "image.repository"      = "602401143452.dkr.ecr.ap-northeast-2.amazonaws.com/amazon/aws-load-balancer-controller"
-
       "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn" = module.lb_controller_role.iam_role_arn
     }
     content {

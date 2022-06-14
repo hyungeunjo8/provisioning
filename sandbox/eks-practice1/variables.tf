@@ -1,3 +1,9 @@
+variable "aws_region" {
+  
+}
+variable "account_id" {
+}
+
 variable "vpc_name" {
     description = "vpc-name"
 }
@@ -24,4 +30,10 @@ variable "lb_controller_iam_role_name" {
 }
 
 variable "lb_controller_service_account_name" {
+}
+
+variable "eks_pod_service_account_name" {
+}
+
+variable "eks_pod_iam_role_for_service_accounts_name" {
 }
