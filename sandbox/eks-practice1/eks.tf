@@ -1,8 +1,3 @@
-provider "kubernetes" {
-  config_path    = "~/.kube/config"
-  config_context = "arn:aws:eks:${var.aws_region}:${var.account_id}:cluster/${var.eks_cluster_name}"
-}
-
 module "eks" {
     source = "terraform-aws-modules/eks/aws"
     

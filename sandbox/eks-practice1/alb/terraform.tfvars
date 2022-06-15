@@ -1,0 +1,6 @@
+lb_controller_policy_name_prefix = "AWSLoadBalancerControllerIAMPolicy"
+lb_controller_image_url = "602401143452.dkr.ecr.ap-northeast-2.amazonaws.com/amazon/aws-load-balancer-controller"
+lb_controller_iam_role_name = "inhouse-eks-aws-lb-ctrl"
+lb_controller_service_account_name = "aws-load-balancer-controller"
+eks_pod_service_account_name = "hgjo-eks-practice-cluster-service-account-1"
+eks_pod_iam_role_for_service_accounts_name = "hgjo-eks-practice-cluster-iam-role-for-service-accounts-1"

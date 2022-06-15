@@ -4,7 +4,7 @@ module "iam_eks_role" {
 
   oidc_providers = {
     main = {
-      provider_arn = "arn:aws:iam::${var.account_id}:oidc-provider/${replace(module.eks.cluster_oidc_issuer_url, "https://", "")}"
+      provider_arn = "arn:aws:iam::${var.account_id}:oidc-provider/${replace(data.terraform_remote_state.eks.outputs.eks_cluster_oidc_issuer_url, "https://", "")}"
       namespace_service_accounts = ["default:${var.eks_pod_service_account_name}"]
     }
   }
