@@ -35,10 +35,12 @@ data "http" "iam_policy" {
 }
 
 resource "aws_iam_role_policy" "controller" {
-  name_prefix = "AWSLoadBalancerControllerIAMPolicy"
+  name_prefix = var.lb_controller_policy_name_prefix
   policy      = data.http.iam_policy.body
   role        = module.lb_controller_role.iam_role_name
 }
+
+# https://aws.amazon.com/ko/premiumsupport/knowledge-center/eks-resolve-pending-fargate-pods/
 
 resource "helm_release" "release" {
   name       = "aws-load-balancer-controller"
@@ -53,7 +55,7 @@ resource "helm_release" "release" {
       "serviceAccount.name"   = var.lb_controller_service_account_name
       "region"                = "${var.aws_region}"
       "vpcId"                 = module.vpc.vpc_id
-      "image.repository"      = "602401143452.dkr.ecr.ap-northeast-2.amazonaws.com/amazon/aws-load-balancer-controller"
+      "image.repository"      = "${var.lb_controller_image_url}"
       "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn" = module.lb_controller_role.iam_role_arn
     }
     content {
@@ -61,4 +63,8 @@ resource "helm_release" "release" {
       value = set.value
     }
   }
+
+  depends_on = [
+    module.eks
+  ]
 }

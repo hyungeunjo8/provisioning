@@ -26,6 +26,12 @@ variable "private_subnets" {
 variable "eks_cluster_name" {
 }
 
+variable "lb_controller_policy_name_prefix" {
+}
+
+variable "lb_controller_image_url" {
+}
+
 variable "lb_controller_iam_role_name" {
 }
 
