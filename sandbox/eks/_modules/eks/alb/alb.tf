@@ -1,17 +1,17 @@
 provider "kubernetes" {
   config_path    = "~/.kube/config"
-  config_context = "arn:aws:eks:${var.aws_region}:${var.account_id}:cluster/${var.eks_cluster_name}"
+  config_context = "arn:aws:eks:${var.aws_region}:${var.account_id}:cluster/${var.eks_cluster_id}"
 }
 
 data "aws_eks_cluster_auth" "this" {
-  name = var.eks_cluster_name
+  name = var.eks_cluster_id
 }
 
 provider "helm" {
   kubernetes {
-    host                   = data.terraform_remote_state.eks.outputs.eks_cluster_endpoint
+    host                   = var.eks_cluster_endpoint
     token                  = data.aws_eks_cluster_auth.this.token
-    cluster_ca_certificate = base64decode(data.terraform_remote_state.eks.outputs.eks_cluster_certificate_authority_data)
+    cluster_ca_certificate = base64decode(var.eks_cluster_certificate_authority_data)
   }
 }
 
@@ -26,7 +26,7 @@ module "lb_controller_role" {
 
   role_permissions_boundary_arn = ""
 
-  provider_url = replace(data.terraform_remote_state.eks.outputs.eks_cluster_oidc_issuer_url, "https://", "")
+  provider_url = replace(var.eks_cluster_oidc_issuer_url, "https://", "")
   oidc_fully_qualified_subjects = [
     "system:serviceaccount:kube-system:${var.lb_controller_service_account_name}"
   ]
@@ -55,11 +55,11 @@ resource "helm_release" "release" {
 
   dynamic "set" {
     for_each = {
-      "clusterName"           = data.terraform_remote_state.eks.outputs.eks_cluster_id
+      "clusterName"           = var.eks_cluster_id
       "serviceAccount.create" = "true"
       "serviceAccount.name"   = var.lb_controller_service_account_name
       "region"                = "${var.aws_region}"
-      "vpcId"                 = data.terraform_remote_state.eks.outputs.vpc_vpc_id
+      "vpcId"                 = var.vpc_vpc_id
       "image.repository"      = "${var.lb_controller_image_url}"
       "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn" = module.lb_controller_role.iam_role_arn
     }
