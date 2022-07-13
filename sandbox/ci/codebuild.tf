@@ -143,5 +143,6 @@ resource "aws_codebuild_webhook" "codebuild_webhook" {
 
 resource "aws_ecr_repository" "ecr" {
   name                 = "${var.ecr_repository_name}"
+  force_delete = true
 }
 

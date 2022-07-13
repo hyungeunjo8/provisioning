@@ -1,0 +1,5 @@
+codebuild_name = "hgjo-msk-produce"
+github_repo = "https://github.com/hyungeunjo8/eks-fargate-practice"
+image_tag = "produce"
+source_version = "feature/msk-produce-practice"
+ecr_repository_name = "hgjo-msk-produce"
