@@ -136,7 +136,7 @@ resource "aws_codebuild_webhook" "codebuild_webhook" {
 
     filter {
       type    = "HEAD_REF"
-      pattern = "feature/msk-consume-practice"
+      pattern = var.source_version
     }
   }
 }
