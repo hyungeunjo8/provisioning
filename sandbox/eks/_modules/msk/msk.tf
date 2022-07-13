@@ -10,7 +10,7 @@ resource "aws_msk_cluster" "cluster" {
 
     broker_node_group_info {
         instance_type = "kafka.m5.large"
-        client_subnets = data.terraform_remote_state.eks.outputs.vpc_private_subnets
+        client_subnets = var.vpc_private_subnets
         storage_info {
             ebs_storage_info {
                 volume_size = 10
@@ -32,15 +32,15 @@ resource "aws_msk_cluster" "cluster" {
 }
 
 resource "aws_security_group" "broker" {
-  name        = "${var.msk_cluster_name}-${data.terraform_remote_state.eks.outputs.vpc_vpc_id}"
+  name        = "${var.msk_cluster_name}-${var.vpc_vpc_id}"
   description = "${var.msk_cluster_name} MSK Security Group"
-  vpc_id      = data.terraform_remote_state.eks.outputs.vpc_vpc_id
+  vpc_id      = var.vpc_vpc_id
 
   ingress {
     from_port   = 9092
     to_port     = 9092
     protocol    = "tcp"
-    cidr_blocks = ["${data.terraform_remote_state.eks.outputs.vpc_cidr_block}"]
+    cidr_blocks = ["${var.vpc_cidr_block}"]
     description = "bootstrap port"
   }
 
