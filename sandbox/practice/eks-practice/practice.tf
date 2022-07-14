@@ -1,6 +1,10 @@
 # vpc + eks + dynamodb + s3
-# terraform init
-# terraform apply
+# terraform init & terraform apply
+# cd alb
+# terraform init & terraform apply
+# cd .. & cd serviceaccount
+# terraform init & terraform apply
+
 module "vpc_pracitce" {
   source = "../../vpc/_modules"
 

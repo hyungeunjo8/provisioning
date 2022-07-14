@@ -55,12 +55,12 @@ resource "helm_release" "release" {
 
   dynamic "set" {
     for_each = {
-      "clusterName"           = var.eks_cluster_id
-      "serviceAccount.create" = "true"
-      "serviceAccount.name"   = var.lb_controller_service_account_name
-      "region"                = "${var.aws_region}"
-      "vpcId"                 = var.vpc_vpc_id
-      "image.repository"      = "${var.lb_controller_image_url}"
+      "clusterName"                                               = var.eks_cluster_id
+      "serviceAccount.create"                                     = "true"
+      "serviceAccount.name"                                       = var.lb_controller_service_account_name
+      "region"                                                    = "${var.aws_region}"
+      "vpcId"                                                     = var.vpc_vpc_id
+      "image.repository"                                          = "${var.lb_controller_image_url}"
       "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn" = module.lb_controller_role.iam_role_arn
     }
     content {

@@ -1,6 +1,6 @@
 resource "aws_codebuild_project" "codebuild" {
-  name          = "${var.codebuild_name}-codebuild"
-  description   = var.codebuild_name
+  name         = "${var.codebuild_name}-codebuild"
+  description  = var.codebuild_name
   service_role = aws_iam_role.role.arn
 
   artifacts {
@@ -8,10 +8,10 @@ resource "aws_codebuild_project" "codebuild" {
   }
 
   environment {
-    compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "aws/codebuild/standard:4.0"
-    type                        = "LINUX_CONTAINER"
-    privileged_mode             = true
+    compute_type    = "BUILD_GENERAL1_SMALL"
+    image           = "aws/codebuild/standard:4.0"
+    type            = "LINUX_CONTAINER"
+    privileged_mode = true
 
 
     environment_variable {
@@ -142,7 +142,7 @@ resource "aws_codebuild_webhook" "codebuild_webhook" {
 }
 
 resource "aws_ecr_repository" "ecr" {
-  name                 = "${var.ecr_repository_name}"
+  name         = var.ecr_repository_name
   force_delete = true
 }
 

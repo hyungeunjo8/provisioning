@@ -1,6 +1,10 @@
-# vpc + eks
-# terraform init
-# terraform apply
+# vpc + eks + mks
+# terraform init & terraform apply
+# cd alb
+# terraform init & terraform apply
+# cd ci
+# terraform init & terraform apply
+
 module "vpc_pracitce" {
   source = "../../vpc/_modules"
 
