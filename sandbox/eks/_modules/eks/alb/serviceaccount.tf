@@ -8,10 +8,7 @@ module "iam_eks_role" {
       namespace_service_accounts = ["default:${var.eks_pod_service_account_name}"]
     }
   }
-  role_policy_arns = {
-    AmazonS3FullAccess = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
-    AmazonDynamoDBFullAccess = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
-  }
+  role_policy_arns = var.eks_service_account_policy
 }
 
 resource "kubernetes_service_account" "service-accounts" {

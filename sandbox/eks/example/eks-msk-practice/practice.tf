@@ -16,4 +16,5 @@ module "example_eks_practice" {
     private_subnets = [ "10.194.100.0/24", "10.194.101.0/24" ]
 
     eks_cluster_name = "hgjo-eks-practice-cluster-7"
+    eks_cluster_version = "1.21"
 }

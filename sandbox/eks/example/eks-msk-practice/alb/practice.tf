@@ -8,6 +8,11 @@ module "example_alb" {
     lb_controller_image_url = "602401143452.dkr.ecr.ap-northeast-2.amazonaws.com/amazon/aws-load-balancer-controller"
     lb_controller_iam_role_name = "inhouse-eks-aws-lb-ctrl"
     lb_controller_service_account_name = "aws-load-balancer-controller"
+
+    eks_service_account_policy = {
+        AmazonS3FullAccess = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+        AmazonDynamoDBFullAccess = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+    }
     eks_pod_service_account_name = "hgjo-eks-practice-cluster-service-account-7"
     eks_pod_iam_role_for_service_accounts_name = "hgjo-eks-practice-cluster-iam-role-for-service-accounts-7"
 
